@@ -10,8 +10,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
 
         .contact-form {
@@ -46,7 +47,6 @@
             border-radius: 8px;
             border: 1px solid #ccc;
             font-size: 16px;
-            box-sizing: border-box;
         }
 
         textarea {
@@ -67,11 +67,20 @@
         button:hover {
             background-color: #005ce6;
         }
+
+        .confirmation {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            color: #003d66;
+        }
     </style>
 </head>
 <body>
 
-    <form class="contact-form">
+    <form class="contact-form" onsubmit="afficherMessage(event)">
         <h2>Formulaire de Contact</h2>
 
         <div class="form-group">
@@ -90,7 +99,28 @@
         </div>
 
         <button type="submit">Envoyer</button>
+
+        <div id="confirmation" class="confirmation" style="display: none;"></div>
     </form>
+
+    <script>
+        function afficherMessage(event) {
+            event.preventDefault(); // Empêche le rechargement de la page
+
+            const nom = document.getElementById("nom").value;
+            const prenom = document.getElementById("prenom").value;
+            const message = document.getElementById("message").value;
+
+            const confirmationDiv = document.getElementById("confirmation");
+            confirmationDiv.innerHTML = `
+                <strong>Merci pour votre message !</strong><br>
+                <strong>Nom :</strong> ${nom}<br>
+                <strong>Prénom :</strong> ${prenom}<br>
+                <strong>Message :</strong> ${message}
+            `;
+            confirmationDiv.style.display = "block";
+        }
+    </script>
 
 </body>
 </html>
