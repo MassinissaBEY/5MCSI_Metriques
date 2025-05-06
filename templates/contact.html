@@ -3,50 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Contactez-moi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-XxQ+z0drIHxv9YzLV3Z6mEPMbbL1rMjWqgGEw7xyMFw28F0+6FzXZ5+vnALZBBx8vHEFP+jRb1AXhw+H3Y0CjA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
         }
 
         .contact-form {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            max-width: 500px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
             width: 100%;
+            max-width: 550px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
         }
 
         .contact-form h2 {
-            margin-bottom: 20px;
-            color: #333;
             text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #444;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #34495e;
         }
 
         input, textarea {
             width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 16px;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #dcdde1;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #7f8ff4;
+            outline: none;
         }
 
         textarea {
@@ -54,34 +71,43 @@
         }
 
         button {
-            background-color: #0072ff;
+            background: #7f8ff4;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 12px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             width: 100%;
+            transition: background 0.3s ease;
         }
 
         button:hover {
-            background-color: #005ce6;
+            background: #5f6de4;
         }
 
         .confirmation {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 25px;
+            padding: 18px;
             border-radius: 10px;
-            background-color: #e6f7ff;
-            border: 1px solid #b3e0ff;
-            color: #003d66;
+            background-color: #ecf9ec;
+            border: 1px solid #b8e6b8;
+            color: #2d8f2d;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .icon {
+            margin-right: 8px;
+            color: #7f8ff4;
         }
     </style>
 </head>
 <body>
 
     <form class="contact-form" onsubmit="afficherMessage(event)">
-        <h2>Formulaire de Contact</h2>
+        <h2><i class="fas fa-envelope icon"></i>Formulaire de Contact</h2>
 
         <div class="form-group">
             <label for="nom">Nom</label>
@@ -98,14 +124,14 @@
             <textarea id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
         </div>
 
-        <button type="submit">Envoyer</button>
+        <button type="submit"><i class="fas fa-paper-plane icon"></i>Envoyer</button>
 
         <div id="confirmation" class="confirmation" style="display: none;"></div>
     </form>
 
     <script>
         function afficherMessage(event) {
-            event.preventDefault(); // Empêche le rechargement de la page
+            event.preventDefault();
 
             const nom = document.getElementById("nom").value;
             const prenom = document.getElementById("prenom").value;
@@ -113,10 +139,10 @@
 
             const confirmationDiv = document.getElementById("confirmation");
             confirmationDiv.innerHTML = `
-                <strong>Merci pour votre message !</strong><br>
+                <strong><i class="fas fa-check-circle"></i> Merci pour votre message !</strong><br><br>
                 <strong>Nom :</strong> ${nom}<br>
                 <strong>Prénom :</strong> ${prenom}<br>
-                <strong>Message :</strong> ${message}
+                <strong>Message :</strong><br>${message}
             `;
             confirmationDiv.style.display = "block";
         }
